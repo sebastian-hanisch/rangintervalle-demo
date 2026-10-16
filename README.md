@@ -1,5 +1,7 @@
 # Rangintervalle und Shrinkage: wie sicher ist Platz 3? – Streamlit-Demo
 
+**[→ Demo live ausprobieren](https://sebastianhanisch-rangintervalle-demo.streamlit.app/)**
+
 Dreizehntes Stück der **Ranking-Linie** (Konzepte-Demo), Nachfolger von `aktives-ranking-demo` und `bradley-terry-demo`: Eine Rangliste nennt einen Rang, aber nicht, wie sicher er ist.
 Gemessen wird, **wie breit ein Rangintervall ist**, **wie sehr die Spitze der Liste überschätzt** wird (Gewinnerfluch), was **Shrinkage** (Empirical Bayes) daran ändert und was nicht
 (**die Rangfolge**), ob die Intervalle **ihre Abdeckung halten** und was passiert, wenn **die Stärksten selten spielen**. Das Vehikel ist das neutrale, simulierte Turnier der Wurzel
@@ -140,4 +142,4 @@ Gebaut mit Streamlit, Plotly, numpy, pandas und fpdf2.
 
 ---
 
-Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zu den Demos: [Interaktive Demos](https://sebastianhanisch.net/demos.html).
+Diese Demo ist Teil des Portfolios von [Sebastian Hanisch](https://sebastianhanisch.net) – Operations Research und Machine Learning ([Über mich](https://sebastianhanisch.net/ueber-mich.html)). Mehr zur Reihe: [Ranking: von der Siegtabelle bis Learning to Rank](https://sebastianhanisch.net/konzepte-ranking.html).
