@@ -48,5 +48,5 @@ def build_pdf(a: ev.Analysis) -> bytes:
     pdf.set_font("Helvetica", "I", 8)
     pdf.multi_cell(0, 4.5, _latin(
         "Alles ist simuliert (Stärken aus dem Generator der Ranking-Linie, Ausgänge aus der logistischen Gewinnwahrscheinlichkeit); der wahre Rang ist nur in der Simulation bekannt. "
-        "Shrinkage korrigiert die Werte, nicht die Ordnung. Quelle: Demo von Sebastian Hanisch, sebastianhanisch.net."), new_x="LMARGIN", new_y="NEXT")
+        "Shrinkage korrigiert die Werte, die Ordnung ändert sie kaum. Quelle: Demo von Sebastian Hanisch, sebastianhanisch.net."), new_x="LMARGIN", new_y="NEXT")
     return bytes(pdf.output())

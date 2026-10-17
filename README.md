@@ -3,19 +3,19 @@
 **[→ Demo live ausprobieren](https://sebastianhanisch-rangintervalle-demo.streamlit.app/)**
 
 Dreizehntes Stück der **Ranking-Linie** (Konzepte-Demo), Nachfolger von `aktives-ranking-demo` und `bradley-terry-demo`: Eine Rangliste nennt einen Rang, aber nicht, wie sicher er ist.
-Gemessen wird, **wie breit ein Rangintervall ist**, **wie sehr die Spitze der Liste überschätzt** wird (Gewinnerfluch), was **Shrinkage** (Empirical Bayes) daran ändert und was nicht
+Gemessen wird, **wie breit ein Rangintervall ist**, **wie sehr die Spitze der Liste überschätzt** wird (Gewinnerfluch), was **Shrinkage** (Empirical Bayes) daran ändert und was kaum
 (**die Rangfolge**), ob die Intervalle **ihre Abdeckung halten** und was passiert, wenn **die Stärksten selten spielen**. Das Vehikel ist das neutrale, simulierte Turnier der Wurzel
 (Stärken aus dem Generator Version 1, wortgleich); alles ist simuliert, es gibt keinen echten Datensatz.
 
 ## Kernfrage
 
-Wie sicher ist Platz 3? **Bei 66 Partien (12 Spieler, jedes Paar einmal) liegt der wahre Drittbeste mit 90 % Sicherheit irgendwo zwischen Rang 1,4 und 7,4**; die mittlere Breite aller
+Wie sicher ist Platz 3? **Bei 66 Partien (12 Spieler, jedes Paar einmal) reicht das 90-%-Intervall des wahren Drittbesten im Mittel über 60 Läufe von Rang 1,4 bis 7,4** (einzelne Intervalle sind ganzzahlig, die obere Grenze liegt zwischen 4 und 12); die mittlere Breite aller
 Intervalle ist 7,2 von 12 Rängen. Mit 264 Partien (vier je Paar) sind es 1,5 bis 4,8, mit 528 Partien Breite 3,3. **Die Spitze ist zu hoch geschätzt:** der geschätzte Beste liegt mit reiner
-Bradley-Terry-Schätzung im Mittel **1,85 Stärkeeinheiten** (θ; ein Stärkeabstand zwischen Nachbarn ist 0,3) über seiner wahren Stärke, mit Ridge (λ = 0,1) 1,16, mit
+Bradley-Terry-Schätzung (eingebautes λ = 0,01; mit 0,001 sind es 2,36) im Mittel **1,85 Stärkeeinheiten** (θ; ein Stärkeabstand zwischen Nachbarn ist 0,3) über seiner wahren Stärke, mit Ridge (λ = 0,1) 1,16, mit
 **Empirical-Bayes-Shrinkage 0,18**; der Fehler der Stärken (MSE) fällt von 1,39 auf 0,37. **Die Rangfolge ändert Shrinkage kaum:** im ausgewogenen Plan gar nicht (Paartreffer
-0,850 gegen 0,849), bei ungleicher Aktivität um 0,015 (0,811 gegen 0,826 bei 66 Partien). Shrinkage korrigiert die **Werte**, nicht die **Ordnung**. **Die Intervalle halten ihre
+0,850 gegen 0,849), bei ungleicher Aktivität um 0,015 (0,811 gegen 0,826 bei 66 Partien). Shrinkage korrigiert die **Werte**, die **Ordnung** ändert sie kaum. **Die Intervalle halten ihre
 Abdeckung, sind aber konservativ:** das Posterior-Intervall deckt den wahren Rang in 0,96 bis 0,99 der Fälle (gewünscht 0,90), der Bootstrap der Partien bei ungleicher Aktivität und 66
-Partien nur 0,89; den wahren Besten deckt auch das Posterior-Intervall dort nur zu 0,87. Und **wenn die Stärksten selten spielen**, kostet Shrinkage Treffer: Sieger richtig 0,27 gegen
+Partien 0,89 (von 0,90 nicht zu unterscheiden), den wahren Besten nur zu 0,77; auch das Posterior-Intervall deckt ihn dort nur zu 0,87. Und **wenn die Stärksten selten spielen**, kostet Shrinkage Treffer: Sieger richtig 0,27 gegen
 0,55 bei der Siegquote.
 
 ## Modell
@@ -38,7 +38,7 @@ Partien nur 0,89; den wahren Besten deckt auch das Posterior-Intervall dort nur 
 - **Gleiche Daten für alle Schätzer und Verfahren:** Alle vier Schätzer und die drei Intervalle sehen dieselben Partien einer Instanz.
 - **Zufall:** `turnier_generator.py` mit SplitMix64-Strom (wortgleich mit den Repos der Linie); Normalwerte per Box-Muller aus demselben Strom; Ausgänge, Paarwahl, Ziehungen und
   Bootstrap in fester Anordnung je Instanz.
-- **Rechenzeit:** Die Experimente rechnen beim ersten Aufruf rund eine Minute und werden danach zwischengespeichert.
+- **Rechenzeit:** Die Experimente rechnen beim ersten Aufruf etwa zwei Minuten (maschinenabhängig) und werden danach zwischengespeichert.
 
 ## Befunde (gemessen, keine Behauptungen)
 
@@ -50,7 +50,7 @@ Alle Zahlen: 60 feste Läufe, 12 Spieler, δ = 0,3, Aktivität 1 : 10 (ungleich)
 | Spreizung und MSE der Stärken | Spreizung ML 1,65 (66 Partien) → 1,14 (264), EB 0,81 → 0,96; MSE (ML / Ridge / EB) 1,39 / 0,62 / 0,37 (66, ausgewogen), 0,16 / 0,15 / 0,12 (264); ungleich, 66 Partien: 2,71 / 0,91 / 0,48. | `test_spread_and_error_of_the_strengths` |
 | Paartreffer (Siegquote / ML / Ridge / EB) | ausgewogen: alle vier innerhalb 0,01 (66 Partien 0,850 / 0,851 / 0,848 / 0,849); ungleich, 66 Partien **0,811 / 0,816 / 0,819 / 0,826**, 264: 0,909 / 0,916 / 0,916 / 0,920; Sieger richtig ungleich 264: 0,68 (Siegquote) gegen 0,62 (EB). | `test_shrinkage_barely_changes_the_order` |
 | Breite des 90-%-Posterior-Intervalls (66 / 132 / 264 / 528 Partien) | ausgewogen **7,2** / 5,6 / 4,2 / 3,3 von 12 Rängen, ungleich 7,8 / 6,3 / 5,0 / 3,9; wahrer Drittbester bei 66 Partien Rang **1,4 bis 7,4**, bei 264 Partien 1,5 bis 4,8. | `test_interval_width_and_the_third_best` |
-| Abdeckung (gewünscht 0,90): Posterior / Bootstrap | Posterior 0,96 bis 0,99 in allen acht Fällen; Wald (ML) 0,96 (66 Partien, ausgewogen); Bootstrap 0,93 (ausgewogen, 66), **0,89** (ungleich, 66), 0,93 (ungleich, 132), 0,98 (ausgewogen, 264); den wahren Besten decken bei ungleich und 66 Partien Posterior 0,87 und Bootstrap **0,77**. | `test_coverage_of_the_intervals` |
+| Abdeckung (gewünscht 0,90): Posterior / Bootstrap | Posterior 0,96 bis 0,99 in allen acht Fällen; Wald (ML) 0,96 (66 Partien, ausgewogen); Bootstrap 0,93 (ausgewogen, 66), **0,89** (ungleich, 66; ± 0,014 Standardfehler, von 0,90 nicht zu unterscheiden), 0,93 (ungleich, 132), 0,98 (ausgewogen, 264); den wahren Besten decken bei ungleich und 66 Partien Posterior 0,87 und Bootstrap **0,77**. | `test_coverage_of_the_intervals` |
 | Abdeckung, wenn der Prior stimmt (Stärken normal gezogen, 66 Partien) | Posterior 0,96 (beide Spielpläne), Bootstrap 0,92 (ausgewogen) und **0,88** (ungleich). | `test_with_a_matching_prior_the_posterior_is_still_conservative` |
 | Kalibrierung von P(Bester) (gepoolt: 66 und 264 Partien, beide Spielpläne, 2880 Spieler-Läufe) | gesagt / tatsächlich in fünf Klassen: 0,01 / 0,01; 0,10 / 0,10; 0,29 / 0,35; 0,54 / 0,45; **0,82 / 0,78** (n = 63): alle Abweichungen unter 0,12. | `test_p_best_is_roughly_calibrated` |
 | Abbruchregel (Halt bei P(Bester) ≥ Schwelle, nach jeder vollständigen Runde, höchstens 12 Runden) | Schwelle 0,8 / 0,9 / 0,95: Läufe mit Halt 82 % / 47 % / 28 %; Treffer bei Halt **0,86 / 0,89 / 1,00**; Median der Partien 396 / 792 / 792 (Budget 792). Enges Feld (δ = 0,12): Halt bei 0,9 in 10 % der Läufe, Treffer aller Läufe 0,57. | `test_the_stop_rule` |
@@ -65,10 +65,10 @@ Die Kalibrierung und die Treffer der Abbruchregel beruhen auf 63 bzw. 17 bis 49 
   gepoolt über vier Fälle und 60 Läufe sind es **0,82 gegen 0,78**, alle Klassen weichen weniger als 0,12 ab; (2) „die Abbruchregel verfehlt ihr Versprechen“ (Schwelle 0,8 trifft 0,76):
   über 60 feste Läufe trifft sie **0,86**. Die Abweichungen der Vorab-Messung lagen im Standardfehler (0,05).
 - **Die Zahlen verschieben sich** gegen die Vorab-Messung (Verzerrung ML 1,57 → 1,85, Posterior-Breite 7,1 → 7,2, Sieger richtig bei selten spielenden Besten 0,20 → 0,27, Siegquote 0,41 → 0,55);
-  die Aussagen bleiben (Spitze überschätzt, Shrinkage ändert die Rangfolge kaum, Intervalle konservativ, Bootstrap bei wenigen Partien darunter).
+  die Aussagen bleiben (Spitze überschätzt, Shrinkage ändert die Rangfolge kaum, Intervalle konservativ, Bootstrap beim wahren Besten bei wenigen Partien darunter).
 - **Neu gegen den Plan:** das Posterior-Intervall deckt den wahren **Besten** bei ungleicher Aktivität und 66 Partien nur zu 0,87 (unter den gewünschten 0,90), obwohl die mittlere Abdeckung
   0,97 ist; der Durchschnitt über alle Spieler verdeckt es (Experiment 4, Tabelle nach wahrem Rang).
-- **Empirical Bayes ist nicht erwartungstreu:** Bei gleichabständigen Stärken (keine Normalverteilung) unterschätzt es die Spreizung (0,81 bei 66 Partien); die Verzerrung der Spitze bleibt klein, ist aber
+- **Empirical Bayes ist nicht erwartungstreu:** Es streut die Schätzungen weniger als die Wahrheit (Spreizung 0,81 bei gleichabständigen, 0,74 bei normal gezogenen Stärken, 66 Partien, ausgewogen); das ist die Schrumpfung selbst; die Verzerrung der Spitze bleibt klein, ist aber
   nicht null (+0,18).
 
 ## Abgrenzung
@@ -81,8 +81,8 @@ Die Kalibrierung und die Treffer der Abbruchregel beruhen auf 63 bzw. 17 bis 49 
 
 ## Ehrliche Grenzen
 
-- **Das Modell stimmt:** Wahrheit und Schätzer sind beide Bradley-Terry; mit Zyklen (Stück 11) wären die Intervalle zu eng. Nicht gemessen.
-- **Der Prior ist normal um 0:** Gleichabständige Stärken (Standard) sind keine Normalverteilung; Empirical Bayes unterschätzt dann die Spreizung (Experiment 1). Die Normal-Wahrheit zeigt, was
+- **Das Modell stimmt:** Wahrheit und Schätzer sind beide Bradley-Terry; mit Zyklen (Stück 11) könnten die Intervalle zu eng sein (nicht gemessen).
+- **Der Prior ist normal um 0:** Gleichabständige Stärken (Standard) sind keine Normalverteilung; die Spreizung von Empirical Bayes ist dort 0,81, bei normal gezogenen Stärken 0,74 (Schrumpfung, Experiment 1). Die Normal-Wahrheit zeigt, was
   bei passendem Prior passiert.
 - **Die Abdeckung ist über feste Wahrheiten gemessen:** Wer den Prior anders wählt, erhält andere Zahlen; die Aussage ist „so verhalten sich diese Verfahren hier“.
 - **12 Spieler, ein Aktivitätsverhältnis (1 : 10):** Andere Größen nur über die Regler, nicht in den festen Läufen.
@@ -101,7 +101,7 @@ Die Kalibrierung und die Treffer der Abbruchregel beruhen auf 63 bzw. 17 bis 49 
 
 ## Tests
 
-99 Tests, gut eine Minute (die Experimente rechnen über 60 feste Läufe): Einheiten gegen Handwerte (`test_model.py`: Schätzer, Evidenz, Empirical Bayes, Maße; `test_intervals.py`: Ränge, Quantilintervalle,
+111 Tests, rund dreieinhalb Minuten auf einer ausgelasteten Maschine (die Experimente rechnen über 60 feste Läufe): Einheiten gegen Handwerte (`test_model.py`: Schätzer, Evidenz, Empirical Bayes, Maße; `test_intervals.py`: Ränge, Quantilintervalle,
 Ziehungen, Simulation der Daten), Generator (`test_generator.py`, wortgleich), **Orakel** (`test_oracle_rangintervalle.py`: Schätzer gegen den BFGS von scipy, Laplace-Kovarianz gegen finite
 Differenzen, Evidenz gegen numerische Integration bei zwei Spielern, Rangwahrscheinlichkeiten gegen exakte Quadratur und Aufzählen der Anordnungen, Eigenschaften von Shrinkage: gleiche
 Ordnung im ausgewogenen Plan, Spreizung, λ des Empirical Bayes), Maße und Verdikte (`test_evaluation.py`), alle Zahlen dieses README (`test_claims.py`), Presets, Szenario und PDF

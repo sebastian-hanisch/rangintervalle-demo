@@ -108,7 +108,7 @@ st.markdown(
     """
 Eine Rangliste sagt „Platz 3“, aber nicht, wie sicher das ist. Mit wenigen Partien reicht der Platz eines Spielers über die Hälfte der Liste, und der **geschätzte Beste** liegt im
 Mittel über seiner wahren Stärke: Wer aus vielen den Besten wählt, wählt auch das Glück. Diese Demo ist das **dreizehnte Stück der Ranking-Linie** und misst, **wie breit ein
-Rangintervall ist**, **wie sehr die Spitze überschätzt** wird, was **Shrinkage** (Empirical Bayes) daran ändert, und was es nicht ändert: **die Rangfolge**.
+Rangintervall ist**, **wie sehr die Spitze überschätzt** wird, was **Shrinkage** (Empirical Bayes) daran ändert, und was es kaum ändert: **die Rangfolge**.
 
 Weiter unten: sechs **🔬 Experimente** mit Verdikt, **🚧 Wo die Annahmen enden** und der Expander **📐 Mathematische Formulierung**.
 """
@@ -261,11 +261,11 @@ st.markdown(
     """
 | Annahme | Was passiert, wenn sie verletzt ist | Wer setzt an |
 |---|---|---|
-| **Das Modell stimmt** | Wahrheit und Schätzer sind beide Bradley-Terry. Mit Zyklen (nicht-transitive Stärken) sind die Intervalle zu eng; nicht gemessen. | Nicht-Transitivität |
-| **Die Stärken sind normalverteilt um 0** | Das ist der Prior des Empirical Bayes. Gleichabständige Stärken (Standard) sind keine Normalverteilung: Empirical Bayes unterschätzt die Spreizung (Experiment 1). | – |
+| **Das Modell stimmt** | Wahrheit und Schätzer sind beide Bradley-Terry. Mit Zyklen (nicht-transitive Stärken) könnten die Intervalle zu eng sein (nicht gemessen). | Nicht-Transitivität |
+| **Die Stärken sind normalverteilt um 0** | Das ist der Prior des Empirical Bayes. Gleichabständige Stärken (Standard) sind keine Normalverteilung; die Spreizung von Empirical Bayes ist dort 0,81, bei normal gezogenen Stärken 0,74 (Schrumpfung, Experiment 1). | – |
 | **Wer spielt, hängt nicht an der Stärke** | Spielen die Stärksten selten, zieht Shrinkage ausgerechnet sie nach unten (Experiment 6). | – |
 | **Alle Partien sind unabhängig** | Form, Heimvorteil und Zeitverlauf sind nicht modelliert. | Elo, WHR, Tore und Heimvorteil |
-| **Das Intervall hat 90 %** | Das Posterior-Intervall über ganzzahlige Ränge ist konservativ; der Bootstrap der Partien liegt bei wenigen Partien darunter (Experiment 4). | – |
+| **Das Intervall hat 90 %** | Das Posterior-Intervall über ganzzahlige Ränge ist konservativ; der Bootstrap der Partien deckt im Mittel etwa 0,89 bis 0,93, den wahren Besten aber nur zu 0,77 (Experiment 4). | – |
 | **Die Partien sind gegeben** | Hier wird nur ausgewertet, nicht gewählt; welche Partie als Nächstes sinnvoll ist, zeigt das aktive Ranking. | Aktives Ranking |
 | **Alles ist simuliert** | Die Zahlen gelten für 12 Spieler, diese Abstände und dieses Aktivitätsverhältnis. | – |
 """

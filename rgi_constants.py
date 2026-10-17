@@ -54,7 +54,7 @@ PRESETS = {
     "Die Besten spielen selten": {**_BASE, "design": DESIGNS[1], "games": 132, "coupling": COUPLINGS[2]},
 }
 PRESET_HELP = {
-    "Platz 3 bei 66 Partien": "12 Spieler, jedes Paar einmal: Der wahre Drittbeste liegt mit 90 % Sicherheit irgendwo zwischen Rang 1 und etwa 7.",
+    "Platz 3 bei 66 Partien": "12 Spieler, jedes Paar einmal: Das 90-%-Intervall des wahren Drittbesten reicht im Mittel von Rang 1 bis etwa 7.",
     "Der Gewinnerfluch": "66 Partien bei ungleicher Aktivität, reine Bradley-Terry-Schätzung: Der geschätzte Beste liegt weit über seiner wahren Stärke. Wechseln Sie auf Empirical Bayes.",
     "Mehr Partien": "528 Partien (jedes Paar achtmal): Die Intervalle werden schmal, die Überschätzung der Spitze klein.",
     "Die Besten spielen selten": "Wer stark ist, spielt wenig: Shrinkage zieht ausgerechnet den wahren Besten nach unten, Sieger richtig sinkt.",

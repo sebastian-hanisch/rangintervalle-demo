@@ -175,11 +175,11 @@ def _fake_analysis(design, acc_eb, acc_sq, n=8, tr=None, lo=None, hi=None):
 def test_analysis_verdict_names_the_third_best_and_the_balanced_remark():
     a = _fake_analysis(BAL, 0.80, 0.81)
     t = ev.verdict_analysis(a)[1]
-    assert "zwischen Rang **2** und **6**" in t and "Im ausgewogenen Plan ändert die Schrumpfung die Ordnung kaum" in t
+    assert "von Rang **2** bis **6**" in t and "Im ausgewogenen Plan ändert die Schrumpfung die Ordnung kaum" in t
     assert "Im ausgewogenen Plan" not in ev.verdict_analysis(_fake_analysis(BAL, 0.80, 0.84))[1]
     assert "Im ausgewogenen Plan" not in ev.verdict_analysis(_fake_analysis(UNEQ, 0.80, 0.80))[1]
     two = ev.verdict_analysis(_fake_analysis(BAL, 0.8, 0.8, n=2, tr=[1, 2], lo=[1, 1], hi=[1, 2]))[1]
-    assert "zwischen Rang **1** und **2**" in two                                    # min(3, n): bei zwei Spielern der Zweite
+    assert "von Rang **1** bis **2**" in two                                    # min(3, n): bei zwei Spielern der Zweite
 
 
 def test_stop_rule_halts_exactly_at_the_threshold(monkeypatch):

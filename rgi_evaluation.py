@@ -112,7 +112,7 @@ def verdict_analysis(a: Analysis):
     s = a.settings
     tr = a.true_rank
     i3 = int(np.argmax(tr == min(3, s.n)))
-    text = (f"Der wahre Drittbeste liegt mit {s.level} % Sicherheit zwischen Rang **{int(a.lo[i3])}** und **{int(a.hi[i3])}** ({s.interval}); mittlere Breite der Intervalle {de(a.width, 1)} von "
+    text = (f"Das {s.level}-%-Intervall des wahren Drittbesten reicht von Rang **{int(a.lo[i3])}** bis **{int(a.hi[i3])}** ({s.interval}); mittlere Breite der Intervalle {de(a.width, 1)} von "
             f"{s.n} Rängen, der wahre Rang liegt bei {pct(a.cover)} % der Spieler im Intervall. ")
     b, e = a.est[ML]["bias"], a.est[EB]["bias"]
     text += (f"Der geschätzte Beste liegt bei der Bradley-Terry-Schätzung {signed(b)} über seiner wahren Stärke, mit Empirical Bayes {signed(e)}. "
@@ -260,7 +260,7 @@ def verdict_coverage(main, normal):
     return "warning", (f"Gewünscht 90 %. Gemessen bei {EXP_FIRST} Partien, ausgewogen: Posterior **{pct(b[POSTERIOR]['cover'])} %**, Wald {pct(b[WALD]['cover'])} %, "
                        f"Bootstrap der Partien {pct(b[BOOTSTRAP]['cover'])} %; bei ungleicher Aktivität Posterior {pct(u[POSTERIOR]['cover'])} %, Bootstrap **{pct(u[BOOTSTRAP]['cover'])} %**. "
                        f"Sind die Stärken wirklich normalverteilt (der Prior stimmt), ist es {pct(n[POSTERIOR]['cover'])} % gegen {pct(n[BOOTSTRAP]['cover'])} %. "
-                       "Das Posterior-Intervall ist konservativ, der Bootstrap der Partien liegt bei wenigen Partien und ungleicher Aktivität darunter, am stärksten beim Besten.")
+                       "Das Posterior-Intervall ist konservativ; der Bootstrap der Partien liegt bei wenigen Partien und ungleicher Aktivität im Mittel nahe 0,90, beim wahren Besten aber deutlich darunter.")
 
 
 def verdict_calibration(cal, stop):
