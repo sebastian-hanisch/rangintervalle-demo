@@ -92,9 +92,9 @@ Die Kalibrierung und die Treffer der Abbruchregel beruhen auf 63 bzw. 17 bis 49 
 
 ## Quellen
 
-- Efron, B., Morris, C. (1975): Data analysis using Stein's estimator and its generalizations. *Journal of the American Statistical Association* 70, 311–319 (nicht eingesehen).
-- Laird, N. M., Louis, T. A. (1989): Empirical Bayes ranking methods. *Journal of Educational Statistics* 14, 29–46 (nicht eingesehen).
-- Goldstein, H., Spiegelhalter, D. J. (1996): League tables and their limitations. *Journal of the Royal Statistical Society A* 159, 385–443 (nicht eingesehen).
+- Efron, B., Morris, C. (1975): Data analysis using Stein's estimator and its generalizations. *Journal of the American Statistical Association* 70, 311–319 (eingesehen 2026-10-17, Abschnitt 1, Gl. (1.7)–(1.10), und Abschnitt 2, Gl. (2.3): Stein-Schätzer als Empirical-Bayes-Schätzer mit aus den Daten geschätztem Schrumpfungsfaktor, Schrumpfung zum Gesamtmittel; die Demo schätzt λ stattdessen über die Laplace-Evidenz).
+- Laird, N. M., Louis, T. A. (1989): Empirical Bayes ranking methods. *Journal of Educational Statistics* 14, 29–46 (eingesehen 2026-10-17, S. 31–33, Gl. (2)–(3) und Anhang A: Rang als Summe von Indikatoren, erwartete Ränge aus der Posterior-Verteilung; bei gleicher Posterior-Streuung stimmen sie mit der Ordnung der Posterior-Mittel überein, bei ungleicher Streuung wandern Einheiten mit großer Streuung zum mittleren Rang).
+- Goldstein, H., Spiegelhalter, D. J. (1996): League tables and their limitations. *Journal of the Royal Statistical Society A* 159, 385–443 (eingesehen 2026-10-17, Abschnitt 3.2, S. 391–392, und Abschnitt 5.2, S. 400–402: Intervalle für Ränge aus simulierten Rangverteilungen (Bootstrap oder MCMC); die Rangintervalle des Zufallseffekte-Modells mit Schrumpfung sind noch breiter bzw. konservativer als die der unabhängigen Schätzung).
 - Bradley, R. A., Terry, M. E. (1952): Rank analysis of incomplete block designs. *Biometrika* 39, 324–345 (nicht eingesehen).
 - Steele, G. L., Lea, D., Flood, C. H. (2014): Fast splittable pseudorandom number generators. *OOPSLA 2014*, 453–472 (Zufallsstrom des Generators).
 - **Nicht herangezogen:** Arbeiten zu Bayes-Bootstrap und zu simultanen Rangintervallen; die Zahlen dieser Demo sind Simulation.
